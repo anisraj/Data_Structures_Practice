@@ -1,16 +1,16 @@
 import arrays.Array;
+import linked_lists.MyLinkedList;
 
 import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        Array array = new Array(3);
-        array.insert(10);
-        array.insert(20);
-        array.insert(80);
-        array.insert(30);
-        array.insert(40);
-        array.insertAt(21, 1);
-        array.print();
+        MyLinkedList linkedList = new MyLinkedList();
+        linkedList.addLast(20);
+        linkedList.addLast(30);
+        linkedList.addLast(40);
+        linkedList.addFirst(10);
+        linkedList.reverse();
+        System.out.println(Arrays.toString(linkedList.toArray()));
     }
 }
