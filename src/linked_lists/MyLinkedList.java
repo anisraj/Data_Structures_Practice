@@ -91,19 +91,50 @@ public class MyLinkedList {
     }
 
     public void reverse() {
-        Node current = first;
-        Node next = current.next;
-        while (next != null) {
-            Node node = next.next;
-            next.next = current;
-            current = next;
-            next = node;
+        if (isEmpty()) {
+            return;
         }
-        Node n1 = first;
-        Node nl = last;
-        first = nl;
-        last = n1;
+        Node previous = first;
+        Node current = first.next;
+        while (current != null) {
+            Node next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+        last = first;
         last.next = null;
+        first = previous;
+    }
+
+    public int getKthFromTheEnd(int k) {
+        if (k > size || k <= 0 ) {
+            throw new IllegalArgumentException();
+        }
+        Node current = first;
+        Node next = first;
+        for (int i = 0; i < k-1; i++) {
+            next = next.next;
+        }
+
+        while (next != last) {
+            current = current.next;
+            next = next.next;
+        }
+        return current.value;
+    }
+
+    public String printMiddle() {
+        Node a = first;
+        Node b = first;
+        while (b != last && b.next != last) {
+            a = a.next;
+            b = b.next.next;
+        }
+        if (b != last) {
+            return a.value+","+a.next.value;
+        }
+        return a.value+"";
     }
 
     private Node getPrevious(Node node) {
