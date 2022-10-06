@@ -1,5 +1,6 @@
 import arrays.Array;
 import linked_lists.MyLinkedList;
+import queues.MyPriorityQueue;
 import queues.SomeInterviewQuestions;
 import stack.MinStack;
 import stack.MyStack;
@@ -13,11 +14,12 @@ import java.util.Queue;
 
 public class Main {
     public static void main(String[] args) {
-        Queue<Integer> q = new ArrayDeque<>();
-        q.add(10);
-        q.add(20);
-        q.add(30);
-        System.out.println(q);
-        System.out.println(SomeInterviewQuestions.reverse(q));
+        MyPriorityQueue queue = new MyPriorityQueue(5);
+        queue.add(1);
+        queue.add(3);
+        queue.add(5);
+        queue.add(2);
+        queue.add(2);
+        System.out.println(queue);
     }
 }
