@@ -1,6 +1,7 @@
 package queues;
 
 import java.util.Arrays;
+import java.util.EmptyStackException;
 
 public class MyPriorityQueue {
     private int[] values;
@@ -14,19 +15,28 @@ public class MyPriorityQueue {
         if (count == values.length) {
             throw new IllegalStateException();
         }
-        if (count == 0) {
-            values[count++] = item;
-            return;
-        }
-        for (int i = count - 1; i >= 0; i--) {
+        int i = shiftValuesToInsert(item);
+        values[i] = item;
+        count++;
+    }
+
+    private int shiftValuesToInsert(int item) {
+        int i;
+        for (i = count - 1; i >= 0; i--) {
             if (item < values[i]) {
                 values[i+1] = values[i];
             } else {
-                values[i+1] = item;
                 break;
             }
         }
-        count++;
+        return i + 1;
+    }
+
+    public int remove() {
+        if (count == 0) {
+            throw new IllegalStateException();
+        }
+        return values[--count];
     }
 
     @Override
