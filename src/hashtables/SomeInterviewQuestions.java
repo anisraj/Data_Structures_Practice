@@ -32,4 +32,24 @@ public class SomeInterviewQuestions {
         }
         return Character.MIN_VALUE;
     }
+
+    public static int mostRepeatedElement(int[] input) {
+        if (input == null || input.length == 0) {
+            throw new IllegalArgumentException();
+        }
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int item : input) {
+            int count = map.containsKey(item) ? map.get(item) : 0;
+            map.put(item, count + 1);
+        }
+        int max = 0;
+        int resource = -1;
+        for (Map.Entry<Integer, Integer> item : map.entrySet()) {
+            if (item.getValue() > max) {
+                max = item.getValue();
+                resource = item.getKey();
+            }
+        }
+        return resource;
+    }
 }

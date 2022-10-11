@@ -1,4 +1,5 @@
 import arrays.Array;
+import hashtables.HashTable;
 import hashtables.SomeInterviewQuestions;
 import linked_lists.MyLinkedList;
 import queues.LinkedListQueue;
@@ -12,7 +13,7 @@ import java.util.Queue;
 
 public class Main {
     public static void main(String[] args) {
-        char c = SomeInterviewQuestions.firstRepeatingChar("gren apple");
-        System.out.println(c);
+        int[] input = {1, 2, 2, 3, 3, 3};
+        System.out.println(SomeInterviewQuestions.mostRepeatedElement(input));
     }
 }
