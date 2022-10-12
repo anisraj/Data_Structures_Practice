@@ -13,7 +13,7 @@ import java.util.Queue;
 
 public class Main {
     public static void main(String[] args) {
-        int[] input = {1, 2, 2, 3, 3, 3};
-        System.out.println(SomeInterviewQuestions.mostRepeatedElement(input));
+        int[] input = {2, 7, 11, 15};
+        System.out.println(Arrays.toString(SomeInterviewQuestions.twoSum(input, 9)));
     }
 }

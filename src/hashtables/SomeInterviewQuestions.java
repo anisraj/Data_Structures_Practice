@@ -1,9 +1,6 @@
 package hashtables;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class SomeInterviewQuestions {
 
@@ -42,8 +39,8 @@ public class SomeInterviewQuestions {
             int count = map.containsKey(item) ? map.get(item) : 0;
             map.put(item, count + 1);
         }
-        int max = 0;
-        int resource = -1;
+        int max = -1;
+        int resource = input[0];
         for (Map.Entry<Integer, Integer> item : map.entrySet()) {
             if (item.getValue() > max) {
                 max = item.getValue();
@@ -51,5 +48,36 @@ public class SomeInterviewQuestions {
             }
         }
         return resource;
+    }
+
+    public static int countPairsWithDiff(int[] input, int difference) {
+        Set<Integer> set = new HashSet<>();
+        for (int item : input) {
+            set.add(item);
+        }
+        int result = 0;
+        for (int item : input) {
+            if (set.contains(item + difference)) {
+                result++;
+            }
+            if (set.contains(item - difference)) {
+                result++;
+            }
+            set.remove(item);
+        }
+        return result;
+    }
+
+    public static int[] twoSum(int[] input, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < input.length; i++) {
+            map.put(input[i], i);
+        }
+        for (int i = 0; i < input.length; i++) {
+            if (map.containsKey(target - input[i])) {
+                return new int[] {i, map.get(target - input[i])};
+            }
+        }
+        return null;
     }
 }
