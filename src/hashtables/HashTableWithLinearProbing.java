@@ -46,6 +46,7 @@ public class HashTableWithLinearProbing {
             if (entry == null || entry.key == key) {
                 return index;
             }
+            steps++;
         }
         return -1;
     }
