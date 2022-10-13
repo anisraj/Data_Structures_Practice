@@ -6,6 +6,7 @@ import linked_lists.MyLinkedList;
 import queues.LinkedListQueue;
 import queues.MyPriorityQueue;
 import stack.*;
+import tree.MyTree;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
@@ -14,14 +15,10 @@ import java.util.Queue;
 
 public class Main {
     public static void main(String[] args) {
-        HashTableWithLinearProbing map = new HashTableWithLinearProbing(5);
-        map.put(0,"Anis");
-        map.put(2,"Raju");
-        map.put(5,"Jamadar");
-        map.put(11,"Jamadar");
-        System.out.println(map);
-        map.remove(5);
-        map.remove(11);
-        System.out.println(map);
+        MyTree tree = new MyTree();
+        tree.insert(10);
+        tree.insert(5);
+        tree.insert(15);
+        tree.insert(6);
     }
 }
