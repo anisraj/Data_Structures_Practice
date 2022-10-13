@@ -15,11 +15,13 @@ import java.util.Queue;
 public class Main {
     public static void main(String[] args) {
         HashTableWithLinearProbing map = new HashTableWithLinearProbing(5);
-        map.put(1,"Anis");
+        map.put(0,"Anis");
         map.put(2,"Raju");
-        map.put(3,"Jamadar");
-        map.put(12,"Jamadar");
-        map.remove(12);
+        map.put(5,"Jamadar");
+        map.put(11,"Jamadar");
+        System.out.println(map);
+        map.remove(5);
+        map.remove(11);
         System.out.println(map);
     }
 }

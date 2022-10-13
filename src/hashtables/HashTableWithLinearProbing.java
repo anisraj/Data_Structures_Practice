@@ -30,7 +30,7 @@ public class HashTableWithLinearProbing {
     }
 
     public void remove(int key) {
-        int index = getIndex(key);
+        int index = getIndexForRemove(key);
         if (isEmpty() || index == -1) {
             throw new IllegalStateException();
         }
@@ -44,6 +44,19 @@ public class HashTableWithLinearProbing {
             int index = index(key, steps);
             Entry entry = entries[index];
             if (entry == null || entry.key == key) {
+                return index;
+            }
+            steps++;
+        }
+        return -1;
+    }
+
+    private int getIndexForRemove(int key) {
+        int steps = 0;
+        while (steps < entries.length) {
+            int index = index(key, steps);
+            Entry entry = entries[index];
+            if (entry != null && entry.key == key) {
                 return index;
             }
             steps++;
