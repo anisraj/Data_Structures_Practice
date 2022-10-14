@@ -26,7 +26,70 @@ public class MyTree {
                 current = current.rightChild;
             }
         }
+    }
 
+    public boolean find(int value) {
+        Node current = root;
+        while (current != null) {
+            if (value < current.value) {
+                current = current.leftChild;
+            } else if (value > current.value){
+                current = current.rightChild;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void traversePreOrder() {
+        traversePreOrder(root);
+    }
+    private void traversePreOrder(Node node) {
+        if (node == null) {
+            return;
+        }
+        System.out.println(node.value);
+        traversePreOrder(node.leftChild);
+        traversePreOrder(node.rightChild);
+    }
+
+    public void traverseInOrder() {
+        traverseInOrder(root);
+    }
+    private void traverseInOrder(Node node) {
+        if (node == null) {
+            return;
+        }
+        traverseInOrder(node.leftChild);
+        System.out.println(node.value);
+        traverseInOrder(node.rightChild);
+    }
+
+    public void traversePostOrder() {
+        traversePostOrder(root);
+    }
+    private void traversePostOrder(Node node) {
+        if (node == null) {
+            return;
+        }
+        traversePostOrder(node.leftChild);
+        traversePostOrder(node.rightChild);
+        System.out.println(node.value);
+    }
+
+    public int height() {
+        return height(root);
+    }
+
+    public int height(Node node) {
+        if (node == null) {
+            return -1; //return any minus value
+        }
+        if (node.leftChild == null && node.rightChild == null) {
+            return 0;
+        }
+        return 1 + Math.max(height(node.leftChild), height(node.rightChild));
     }
 
     private class Node {
