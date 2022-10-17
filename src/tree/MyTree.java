@@ -92,6 +92,35 @@ public class MyTree {
         return 1 + Math.max(height(node.leftChild), height(node.rightChild));
     }
 
+    public int min() {
+        return min(root);
+    }
+
+    private int min(Node node) {
+        if (node == null) {
+            return Integer.MAX_VALUE;
+        }
+        if (node.leftChild == null && node.rightChild == null) {
+            return node.value;
+        }
+        int left = min(node.leftChild);
+        int right = min(node.rightChild);
+        return Math.min(Math.min(left, right), node.value);
+    }
+
+    public int minOfBinarySearchTree() {
+        if (root == null) {
+            throw new IllegalStateException();
+        }
+        Node current = root;
+        Node last = current;
+        while (current != null) {
+            last = current;
+            current = current.leftChild;
+        }
+        return last.value;
+    }
+
     private class Node {
         private int value;
         private Node leftChild;
