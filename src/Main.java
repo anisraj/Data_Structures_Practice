@@ -18,13 +18,12 @@ public class Main {
         MyTree tree = new MyTree();
         tree.insert(7);
         tree.insert(4);
-        tree.insert(3);
+        tree.insert(9);
         tree.insert(1);
         tree.insert(6);
-        tree.insert(9);
         tree.insert(8);
         tree.insert(10);
-        System.out.println(tree.minOfBinarySearchTree());
+        System.out.println(tree.contains(101));
 
     }
 }

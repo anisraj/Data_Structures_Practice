@@ -42,6 +42,20 @@ public class MyTree {
         return false;
     }
 
+    public boolean contains(int value) {
+        return contains(root, value);
+    }
+
+    private boolean contains(Node node, int value) {
+        if (node == null) {
+            return false;
+        }
+        if (node.value == value) {
+            return true;
+        }
+        return contains(node.leftChild, value) || contains(node.rightChild, value);
+    }
+
     public void traversePreOrder() {
         traversePreOrder(root);
     }
@@ -108,6 +122,22 @@ public class MyTree {
         return Math.min(Math.min(left, right), node.value);
     }
 
+    public int max() {
+        return max(root);
+    }
+
+    private int max(Node node) {
+        if (node == null) {
+            return Integer.MIN_VALUE;
+        }
+        if (node.leftChild == null && node.rightChild == null) {
+            return node.value;
+        }
+        int left = max(node.leftChild);
+        int right = max(node.rightChild);
+        return Math.max(Math.max(left, right), node.value);
+    }
+
     public int minOfBinarySearchTree() {
         if (root == null) {
             throw new IllegalStateException();
@@ -119,6 +149,88 @@ public class MyTree {
             current = current.leftChild;
         }
         return last.value;
+    }
+
+    public boolean areEquals(MyTree tree) {
+        if (tree == null) {
+            return false;
+        }
+        return isNodeEqual(root, tree.root);
+    }
+
+    private boolean isNodeEqual(Node first, Node second) {
+        if (first == null && second == null) {
+            return true;
+        }
+        if (first == null || second == null) {
+            return false;
+        }
+        boolean left = isNodeEqual(first.leftChild, second.leftChild);
+        boolean right = isNodeEqual(first.rightChild, second.rightChild);
+        return first.value == second.value && left && right;
+    }
+
+    public boolean isBinarySearchTree() {
+        return isValidBinarySearchTree(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+    private boolean isValidBinarySearchTree(Node node, int min, int max) {
+        if (node == null) {
+            return true;
+        }
+        if (node.value < min || node.value > max) {
+            return false;
+        }
+        boolean i = isValidBinarySearchTree(node.leftChild, min, node.value - 1);
+        boolean i1 = isValidBinarySearchTree(node.rightChild, node.value + 1, max);
+        return i && i1;
+    }
+
+    public void nodesAtKDistance(int distance) {
+        nodesAtKDistance(root, distance);
+    }
+
+    private void nodesAtKDistance(Node node, int distance) {
+        if (node == null) {
+            return;
+        }
+        if (distance == 0) {
+            System.out.println(node.value);
+            return;
+        }
+        nodesAtKDistance(node.leftChild, distance - 1);
+        nodesAtKDistance(node.rightChild, distance - 1);
+    }
+
+    public void traverseLevelOrder() {
+        for (int i = 0; i<= height(); i++) {
+            nodesAtKDistance(i);
+        }
+    }
+
+    public int size() {
+        return size(root);
+    }
+
+    private int size(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        return  1 + size(node.leftChild) + size(node.rightChild);
+    }
+
+    public int countLeaves() {
+        return countLeaves(root);
+    }
+
+    private int countLeaves(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        if (node.leftChild == null && node.rightChild == null) {
+            return 1;
+        }
+        return countLeaves(node.leftChild) + countLeaves(node.rightChild);
     }
 
     private class Node {
