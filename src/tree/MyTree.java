@@ -1,5 +1,8 @@
 package tree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MyTree {
 
     private Node root;
@@ -231,6 +234,43 @@ public class MyTree {
             return 1;
         }
         return countLeaves(node.leftChild) + countLeaves(node.rightChild);
+    }
+
+    public boolean areSiblings(int first, int second) {
+        return areSiblings(root, first, second);
+    }
+
+    private boolean areSiblings(Node node, int first, int second) {
+        if (node == null || node.leftChild == null || node.rightChild == null) {
+            return false;
+        }
+        if ((node.leftChild.value == first && node.rightChild.value == second) ||
+                (node.rightChild.value == first && node.leftChild.value == second)) {
+            return true;
+        }
+        return areSiblings(node.leftChild, first, second) || areSiblings(node.rightChild, first, second);
+    }
+
+    public List<Integer> getAncestors(int value) {
+        List<Integer> list = new ArrayList<>();
+        getAncestors(root, value, list);
+        return list;
+    }
+
+    private boolean getAncestors(Node node, int value, List<Integer> list) {
+        if (node == null) {
+            return false;
+        }
+        if (node.value == value) {
+            return true;
+        }
+        boolean l = getAncestors(node.leftChild, value, list);
+        boolean r = getAncestors(node.rightChild, value, list);
+        if (l || r) {
+            list.add(node.value);
+            return true;
+        }
+        return false;
     }
 
     private class Node {
