@@ -5,37 +5,49 @@ public class AVLTree {
     private AVLNode root;
 
     public void insert(int value) {
-        AVLNode node = new AVLNode(value);
-        if (root == null) {
-            root = node;
-            return;
-        }
-        insert(root, value);
+        root = insert(root, value);
     }
 
-    private boolean insert(AVLNode node, int value) {
+    private AVLNode insert(AVLNode node, int value) {
         if (node == null) {
-            return false;
+            return new AVLNode(value);
         }
         if (value < node.value) {
-            if (node.leftChild == null) {
-                node.leftChild = new AVLNode(value);
-                return true;
-            }
-            return insert(node.leftChild, value);
+            node.leftChild = insert(node.leftChild, value);
         } else {
-            if (node.rightChild == null) {
-                node.rightChild = new AVLNode(value);
-                return true;
-            }
-            return insert(node.rightChild, value);
+            node.rightChild = insert(node.rightChild, value);
         }
+        node.height = 1 + Math.max(height(node.leftChild), height(node.rightChild));
+
+        if (isLeftHeavy(node)) {
+            System.out.println(node.value + " node left heavy ");
+        } else if (isRightHeavy(node)) {
+            System.out.println(node.value + " node right heavy");
+        }
+        return node;
+    }
+
+    private boolean isLeftHeavy(AVLNode node) {
+        return balanceFactor(node) > 1;
+    }
+
+    private boolean isRightHeavy(AVLNode node) {
+        return balanceFactor(node) < -1;
+    }
+
+    private int balanceFactor(AVLNode node) {
+        return (node == null) ? 0 : height(node.leftChild) - height(node.rightChild);
+    }
+
+    private int height(AVLNode node) {
+        return (node == null) ? -1 : node.height;
     }
 
     private class AVLNode {
         private int value;
         private AVLNode leftChild;
         private AVLNode rightChild;
+        private int height;
 
         public AVLNode(int value) {
             this.value = value;
@@ -43,7 +55,7 @@ public class AVLTree {
 
         @Override
         public String toString() {
-            return "Node = "+value;
+            return "Node = "+this.value;
         }
     }
 }

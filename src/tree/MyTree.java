@@ -99,9 +99,9 @@ public class MyTree {
         return height(root);
     }
 
-    public int height(Node node) {
+    private int height(Node node) {
         if (node == null) {
-            return -1; //return any minus value
+            return -1;
         }
         if (node.leftChild == null && node.rightChild == null) {
             return 0;
