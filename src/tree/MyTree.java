@@ -273,6 +273,24 @@ public class MyTree {
         return false;
     }
 
+    public boolean isBalanced() {
+        return isBalanced(root);
+    }
+
+    private boolean isBalanced(Node node) {
+        if (node == null) {
+            return true;
+        }
+        if (Math.abs(height(node.leftChild) - height(node.rightChild)) > 1) {
+            return false;
+        }
+        return isBalanced(node.leftChild) && isBalanced(node.rightChild);
+    }
+
+    public boolean isPerfect() {
+        return size() == Math.pow(2, height() + 1) - 1;
+    }
+
     private class Node {
         private int value;
         private Node leftChild;

@@ -16,10 +16,12 @@ import java.util.Queue;
 
 public class Main {
     public static void main(String[] args) {
-        AVLTree tree = new AVLTree();
-        tree.insert(10);
-        tree.insert(20);
+        MyTree tree = new MyTree();
+
         tree.insert(30);
+        tree.insert(10);
+        tree.insert(40);
+        System.out.println(tree.isPerfect());
 
     }
 }
