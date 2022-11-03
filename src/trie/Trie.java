@@ -1,6 +1,8 @@
 package trie;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Trie {
     private Node root = new Node(' ');
@@ -59,6 +61,37 @@ public class Trie {
         if (!child.hasChildren() && !child.isEndOfWord) {
             node.removeChild(ch);
         }
+    }
+
+    public List<String> findWords(String prefix) {
+        List<String> words = new ArrayList<>();
+        Node lastNode = findLastNodeOf(prefix);
+        findWords(lastNode, prefix, words);
+        return words;
+    }
+
+    private void findWords(Node node, String prefix, List<String> words) {
+        if (node == null) {
+            return;
+        }
+        if (node.isEndOfWord) {
+            words.add(prefix);
+        }
+        for (Node child : node.getChildren()) {
+            findWords(child, prefix + child.value, words);
+        }
+    }
+
+    private Node findLastNodeOf(String prefix) {
+        Node current = root;
+        for (char ch : prefix.toCharArray()) {
+            Node child = current.getChild(ch);
+            if (child == null) {
+                return null;
+            }
+            current = child;
+        }
+        return current;
     }
 
     private class Node {

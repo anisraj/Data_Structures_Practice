@@ -16,9 +16,9 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Trie trie = new Trie();
-        trie.insert("cat");
-        trie.insert("can");
-        trie.remove("cat");
-
+        trie.insert("car");
+        trie.insert("card");
+        trie.insert("care");
+        System.out.println(trie.findWords("ca"));
     }
 }
