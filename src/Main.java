@@ -15,10 +15,6 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        Trie trie = new Trie();
-        trie.insert("car");
-        trie.insert("card");
-        trie.insert("care");
-        System.out.println(trie.findWords("ca"));
+        System.out.println(Trie.longestCommonPrefix(new String[]{"canada", "can", "car"}));
     }
 }

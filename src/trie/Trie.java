@@ -32,6 +32,23 @@ public class Trie {
         return current.isEndOfWord;
     }
 
+    public boolean containsRecursive(String input) {
+        if (input == null) {
+            return false;
+        }
+        return containsRecursive(root, 0, input);
+    }
+
+    private boolean containsRecursive(Node node, int index, String input) {
+        if (index == input.length()) {
+            return node.isEndOfWord;
+        }
+        if (!node.hasChild(input.charAt(index))) {
+            return false;
+        }
+        return containsRecursive(node.getChild(input.charAt(index)), index + 1, input);
+    }
+
     public void traverse() {
         traverse(root);
     }
@@ -41,6 +58,17 @@ public class Trie {
         for (Node child : node.getChildren()) {
             traverse(child);
         }
+    }
+
+    public int countWords() {
+        return countWords(root, 0);
+    }
+
+    private int countWords(Node node, int count) {
+        for (Node child : node.getChildren()) {
+            count = 1 + countWords(child, count);
+        }
+        return count;
     }
 
     public void remove(String word) {
@@ -92,6 +120,35 @@ public class Trie {
             current = child;
         }
         return current;
+    }
+
+    public static String longestCommonPrefix(String[] words) {
+        Trie trie = new Trie();
+        for (String word : words) {
+            trie.insert(word);
+        }
+        Node current = trie.root;
+        StringBuilder longestPrefix = new StringBuilder();
+        int maxChars = getShortestWord(words).length();
+        while (longestPrefix.length() < maxChars) {
+            Node[] children = current.getChildren();
+            if (children.length != 1) {
+                break;
+            }
+            current = children[0];
+            longestPrefix.append(current.value);
+        }
+        return longestPrefix.toString();
+    }
+
+    private static String getShortestWord(String[] words) {
+        String shortestWord = words[0];
+        for (int i = 1; i < words.length; i++) {
+            if (words[i].length() < shortestWord.length()) {
+                shortestWord = words[i];
+            }
+        }
+        return shortestWord;
     }
 
     private class Node {
