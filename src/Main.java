@@ -1,5 +1,6 @@
 import arrays.Array;
 import avl_tree.AVLTree;
+import graph.Graph;
 import hashtables.HashTable;
 import hashtables.HashTableWithLinearProbing;
 import heaps.Heap;
@@ -15,6 +16,12 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(Trie.longestCommonPrefix(new String[]{"canada", "can", "car"}));
+        Graph graph = new Graph();
+        graph.addNode("A");
+        graph.addNode("B");
+        graph.addNode("C");
+        graph.addEdge("A", "C");
+        graph.addEdge("A", "B");
+        graph.print();
     }
 }
