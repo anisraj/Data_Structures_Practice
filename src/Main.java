@@ -17,11 +17,18 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Graph graph = new Graph();
+        graph.addNode("X");
         graph.addNode("A");
         graph.addNode("B");
-        graph.addNode("C");
-        graph.addEdge("A", "C");
-        graph.addEdge("A", "B");
-        graph.print();
+        graph.addNode("P");
+
+        graph.addEdge("X", "A");
+        graph.addEdge("X", "B");
+        graph.addEdge("A", "P");
+        graph.addEdge("B", "P");
+
+        System.out.println(graph.topologicalSort());
+
+
     }
 }
