@@ -11,24 +11,18 @@ import queues.MyPriorityQueue;
 import stack.*;
 import tree.MyTree;
 import trie.Trie;
+import undirected_graph.WeightedGraph;
 
 import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        Graph graph = new Graph();
-        graph.addNode("X");
+        WeightedGraph graph = new WeightedGraph();
         graph.addNode("A");
         graph.addNode("B");
-        graph.addNode("P");
-
-        graph.addEdge("X", "A");
-        graph.addEdge("X", "B");
-        graph.addEdge("A", "P");
-        graph.addEdge("B", "P");
-
-        System.out.println(graph.topologicalSort());
-
-
+        graph.addNode("C");
+        graph.addEdge("A", "B", 3);
+        graph.addEdge("A", "C", 2);
+        graph.print();
     }
 }
