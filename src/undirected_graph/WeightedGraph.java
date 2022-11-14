@@ -33,34 +33,30 @@ public class WeightedGraph {
         }
     }
 
-    private class NodeEntry {
-        private Node node;
-        private int priority;
-
-        public NodeEntry(Node node, int priority) {
-            this.node = node;
-            this.priority = priority;
-        }
-    }
-
-    public int getShortestDistance(String from, String to) {
+    public Path getShortestPath(String from, String to) {
         Node fromNode = nodes.get(from);
+        Node toNode = nodes.get(to);
+
+        if (fromNode == null || toNode == null) {
+            throw new IllegalStateException();
+        }
+
         Map<Node, Integer> distances = new HashMap<>();
         for (Node node : nodes.values()) {
             distances.put(node, Integer.MAX_VALUE);
         }
         distances.replace(fromNode, 0);
 
-        Set<Node> visitedNodes = new HashSet<>();
-
-        PriorityQueue<NodeEntry> queue = new PriorityQueue<>(
+        PriorityQueue<NodeEntry> priorityQueue = new PriorityQueue<>(
                 Comparator.comparingInt(ne -> ne.priority)
         );
+        priorityQueue.add(new NodeEntry(fromNode, 0));
 
-        queue.add(new NodeEntry(fromNode, 0));
+        Map<Node, Node> previousNode = new HashMap<>();
 
-        while (!queue.isEmpty()) {
-            Node current = queue.remove().node;
+        Set<Node> visitedNodes = new HashSet<>();
+        while (!priorityQueue.isEmpty()) {
+            Node current = priorityQueue.remove().node;
             visitedNodes.add(current);
             for (Edge edge : current.getEdges()) {
                 if (visitedNodes.contains(edge.to)) {
@@ -69,12 +65,28 @@ public class WeightedGraph {
                 int newDistance = distances.get(current) + edge.weight;
                 if (newDistance < distances.get(edge.to)) {
                     distances.replace(edge.to, newDistance);
-                    queue.add(new NodeEntry(edge.to, newDistance));
+                    previousNode.put(edge.to, current);
+                    priorityQueue.add(new NodeEntry(edge.to, newDistance));
                 }
             }
         }
+        return buildPath(toNode, previousNode);
+    }
 
-        return distances.get(nodes.get(to));
+    private Path buildPath(Node toNode, Map<Node, Node> previousNodes) {
+        Stack<Node> stack = new Stack<>();
+        stack.push(toNode);
+        Node previous = previousNodes.get(toNode);
+        while (previous != null) {
+            stack.push(previous);
+            previous = previousNodes.get(previous);
+        }
+
+        Path path = new Path();
+        while (!stack.empty()) {
+            path.add(stack.pop().label);
+        }
+        return path;
     }
 
     private class Node {
@@ -114,6 +126,16 @@ public class WeightedGraph {
         @Override
         public String toString() {
             return from + " -> " + to + " & weight = "+weight;
+        }
+    }
+
+    private class NodeEntry {
+        private Node node;
+        private int priority;
+
+        public NodeEntry(Node node, int priority) {
+            this.node = node;
+            this.priority = priority;
         }
     }
 }
