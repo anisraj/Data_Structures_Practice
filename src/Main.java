@@ -6,6 +6,7 @@ import hashtables.HashTableWithLinearProbing;
 import heaps.Heap;
 import heaps.SomeInterviewQuestions;
 import linked_lists.MyLinkedList;
+import org.w3c.dom.Node;
 import queues.LinkedListQueue;
 import queues.MyPriorityQueue;
 import stack.*;
@@ -22,14 +23,15 @@ public class Main {
         graph.addNode("B");
         graph.addNode("C");
         graph.addNode("D");
-        graph.addNode("E");
         graph.addEdge("A", "B", 3);
-        graph.addEdge("A", "C", 4);
-        graph.addEdge("A", "D", 2);
-        graph.addEdge("B", "D", 6);
-        graph.addEdge("B", "E", 1);
-        graph.addEdge("C", "D", 1);
-        graph.addEdge("D", "E", 5);
-        System.out.println(graph.getShortestPath("A", "C"));
+        graph.addEdge("A", "C", 1);
+        graph.addEdge("B", "C", 2);
+        graph.addEdge("B", "D", 4);
+        graph.addEdge("C", "D", 5);
+        //graph.print();
+
+        WeightedGraph tree = graph.getMinimumSpanningTree();
+
+        tree.print();
     }
 }
