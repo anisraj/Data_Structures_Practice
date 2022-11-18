@@ -9,10 +9,7 @@ import linked_lists.MyLinkedList;
 import org.w3c.dom.Node;
 import queues.LinkedListQueue;
 import queues.MyPriorityQueue;
-import sorting_algorithms.BubbleSort;
-import sorting_algorithms.InsertionSort;
-import sorting_algorithms.MergeSort;
-import sorting_algorithms.SelectionSort;
+import sorting_algorithms.*;
 import stack.*;
 import tree.MyTree;
 import trie.Trie;
@@ -23,7 +20,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         int[] inputs = {8,2,4,1,3,3};
-        new MergeSort().sort(inputs);
+        new CountingSort().sort(inputs, 8);
         System.out.println(Arrays.toString(inputs));
     }
 }
