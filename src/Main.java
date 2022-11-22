@@ -9,6 +9,9 @@ import linked_lists.MyLinkedList;
 import org.w3c.dom.Node;
 import queues.LinkedListQueue;
 import queues.MyPriorityQueue;
+import searching_algorithms.BinarySearch;
+import searching_algorithms.LinearSearch;
+import searching_algorithms.TernarySearch;
 import sorting_algorithms.*;
 import stack.*;
 import tree.MyTree;
@@ -19,8 +22,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        int[] inputs = {8,2,4,1,3,3};
-        new CountingSort().sort(inputs, 8);
-        System.out.println(Arrays.toString(inputs));
+        int[] inputs = {1,2,3,4,6,8};
+        System.out.println(TernarySearch.search(inputs, 3));
     }
 }
