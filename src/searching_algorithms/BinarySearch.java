@@ -6,7 +6,7 @@ public class BinarySearch {
         return searchRecursively(input, target, 0, input.length - 1);
     }
 
-    private static int searchRecursively(int[] input,
+    public static int searchRecursively(int[] input,
                                          int target,
                                          int left,
                                          int right) {
