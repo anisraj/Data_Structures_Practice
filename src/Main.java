@@ -12,6 +12,7 @@ import queues.MyPriorityQueue;
 import searching_algorithms.*;
 import sorting_algorithms.*;
 import stack.*;
+import string_manipulation_algorithms.StringUtils;
 import tree.MyTree;
 import trie.Trie;
 import undirected_graph.WeightedGraph;
@@ -20,7 +21,6 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        int[] inputs = {1,2,3,4,6,8};
-        System.out.println(ExponentialSearch.search(inputs, 4));
+        System.out.println(StringUtils.reverseOrderOfWords("anis raju jamadar"));
     }
 }
