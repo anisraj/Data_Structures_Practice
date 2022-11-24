@@ -21,6 +21,6 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(StringUtils.reverseOrderOfWords("anis raju jamadar"));
+        System.out.println(StringUtils.capitalize("anis raju    jamadar"));
     }
 }
